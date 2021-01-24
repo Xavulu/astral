@@ -1,0 +1,28 @@
+[package]
+name = "astral"
+version = "0.1.0"
+authors = ["lain || Xavier Fernandez <xavier.fernandez92@myhunter.cuny.edu>"]
+edition = "2018"
+license = "MIT" 
+description = "Yet another file transfer utility"
+readme = "README.md"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rpassword = "5.0.1"
+file_shred = "1.1.0" 
+sodiumoxide = "0.2.6" 
+clap = "2.33.3" 
+tokio = { version = "1.1.0", features = ["full"]}
+flate2 = "1.0.19" 
+serde = { version = "1.0.121", features = ["derive"]} 
+bincode = "1.3.1"
+
+[[bin]]
+name = "astral"
+test = false 
+bench = false
+
+[profile.release]
+opt-level = 'z'
+lto = true  
