@@ -3,6 +3,7 @@ use std::path::Path;
 use serde::{Serialize, Deserialize}; 
 
 const EXTENSION: &str = ".astral"; 
+
 #[derive(Serialize, Deserialize, PartialEq, Debug)]
 pub struct FileInfo { 
     name: String, 
