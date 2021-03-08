@@ -2,13 +2,26 @@ use std::path::Path;
 
 use serde::{Serialize, Deserialize}; 
 
-const EXTENSION: &str = ".astral"; 
-
-#[derive(Serialize, Deserialize, PartialEq, Debug)]
+pub const EXTENSION: &str = ".astral"; 
 pub struct FileInfo { 
-    name: String, 
-    size: usize,
+    pub name: String, 
+    pub encname: String,
+    pub current: usize,
+    pub encsize: usize, 
 }  
+
+#[derive(Serialize, Deserialize)]
+pub enum SentMsg {
+    Info(String, String, usize, usize),
+    Data(Vec<u8>),
+    Hash(Vec<u8>),
+    Pass(String),
+}
+
+#[derive(Serialize, Deserialize)]
+pub enum CanSend{
+    PassCheck(bool),
+}
 
 pub fn enc_name_builder(infile: &Path) -> String{ 
     let origin = Path::new(& infile).file_name().unwrap().to_str().unwrap(); 

@@ -61,6 +61,7 @@ pub fn verify(in_put: &mut File) -> bool {
 } 
 
 pub fn encrypt(input: &mut File, output: &mut File, pass: &str ) -> Result<(), Box<dyn error::Error>> { 
+    sodiumoxide::init().unwrap();
     input.seek(SeekFrom::Start(0))?; 
     let salt = gen_salt(); 
     let key = keygen(pass, &salt); 
@@ -98,6 +99,7 @@ pub fn encrypt(input: &mut File, output: &mut File, pass: &str ) -> Result<(), B
 } 
 
 pub fn decrypt(input: &mut File, output: &mut File, pass: &str ) -> Result<(), Box<dyn error::Error>> { 
+    sodiumoxide::init().unwrap();
     let mut salt = [0u8; SALTBYTES]; 
     input.read_exact(&mut salt)?; 
     let salt = Salt(salt); 
