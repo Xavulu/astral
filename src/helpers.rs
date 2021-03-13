@@ -1,6 +1,8 @@
 use std::path::Path;
 
 use serde::{Serialize, Deserialize}; 
+use walkdir::{DirEntry, WalkDir};
+use arrayvec::ArrayString;
 
 pub const EXTENSION: &str = ".astral"; 
 pub struct FileInfo { 
@@ -23,6 +25,12 @@ pub enum CanSend{
     PassCheck(bool),
 }
 
+
+#[derive(Serialize, Deserialize)]
+pub enum CheckSum{ 
+    FileHash(ArrayString<[u8; 64]>),
+}
+
 pub fn enc_name_builder(infile: &Path) -> String{ 
     let origin = Path::new(& infile).file_name().unwrap().to_str().unwrap(); 
     let outfile = format!("{}{}", origin, String::from(EXTENSION)); 
@@ -35,3 +43,12 @@ pub fn dec_name_builder(infile: &Path) -> String{
     return stripped;
 }
 
+pub fn file_collector(files: Vec<&str>){}
+
+
+pub fn is_hidden(entry: &DirEntry) -> bool {
+    entry.file_name()
+         .to_str()
+         .map(|s| s.starts_with("."))
+         .unwrap_or(false)
+}

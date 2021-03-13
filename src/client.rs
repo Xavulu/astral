@@ -1,6 +1,6 @@
 // the client sends the file (astral projects the file if we going by the theme lmaoooo)
 use super::helpers::{SentMsg, CanSend, enc_name_builder, EXTENSION};
-use super::encrypt::{encrypt}; 
+use super::encrypt::*; 
 
 use message_io::events::{EventQueue}; 
 use message_io::network::{Network, NetEvent, Transport}; 
@@ -19,6 +19,7 @@ enum Event {
 
 pub fn astral_project(file_name: &str, destination: &str) {
     //password stuff: 
+    /* 
     let password = rpassword::prompt_password_stdout("enter a file password: ")
         .expect("couldn't get a password...."); 
     if password.len() < 10 {
@@ -29,7 +30,7 @@ pub fn astral_project(file_name: &str, destination: &str) {
     if confirm.len() != password.len() || confirm != password {
         return println!("your passwords dont match...");
     };
-
+    println!("{}", password);
     let to_hash = password.as_bytes(); 
     let salt: Vec<u8> = (0..128).map(|_| { rand::random::<u8>() }).collect(); 
     println!("{:?}", salt);
@@ -37,10 +38,12 @@ pub fn astral_project(file_name: &str, destination: &str) {
     let hashed_pass = argon2::hash_encoded(to_hash, &salt, &config).unwrap();
     
     //encryption stuff:
+    */
     let mut file = File::open(file_name).unwrap(); 
     let enc_name = format!("{}{}", file_name, EXTENSION);
     let mut enc = File::create(&enc_name).unwrap();
-    encrypt(&mut file, &mut enc, &password[..]).unwrap();
+    let test_pass = "1234567890";
+    
     return println!("okiedokie");
 
 

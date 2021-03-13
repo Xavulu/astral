@@ -1,4 +1,4 @@
-use super::encrypt::{decrypt, verify};
+use super::encrypt::*;
 use super::helpers::{FileInfo, SentMsg, CanSend};
 
 use message_io::events::{EventQueue};
